@@ -7,3 +7,4 @@ A Vite + React landing page for the FOSS Club at Sai Vidya Institute of Technolo
 - Interactive event cards and gallery lightbox
 - Membership badge generator with downloadable PNG export
 - Editable committee and faculty names with automatic avatar initial updates
+# foss-svit-collab.github.io
