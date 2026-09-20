@@ -164,7 +164,7 @@ function App() {
   const [memberName, setMemberName] = useState('STUDENT NAME');
 
   useEffect(() => {
-    const sections = ['home', 'benefits', 'team', 'events', 'membership'];
+    const sections = ['home', 'benefits', 'team', 'events', 'membership', 'contact'];
     const observer = new IntersectionObserver(
       (entries) => entries.forEach((entry) => entry.isIntersecting && setActiveSection(entry.target.id)),
       { rootMargin: '-35% 0px -55% 0px' },
@@ -218,14 +218,8 @@ function App() {
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
       ctx.fillStyle = '#0d2d49';
-      ctx.font = '900 58px Manrope, sans-serif';
-      const titleCaseName = safeName
-        .toLowerCase()
-        .split(/\s+/)
-        .filter(Boolean)
-        .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-        .join(' ');
-      ctx.fillText(`[ ${titleCaseName} ]`, width / 2, 1190);
+      ctx.font = '900 58px Galindo, sans-serif';
+      ctx.fillText(`[ ${safeName} ]`, width / 2, 1190);
 
       canvas.toBlob((blob) => {
         if (!blob) return;
@@ -247,7 +241,9 @@ function App() {
       <div className="noise" />
       <header className="site-header">
         <a href="#home" className="brand brand--with-divider" onClick={closeMenu}>
-          <img src="/svit-logo.png" alt="SVIT logo" className="brand__svit-logo" aria-label="SVIT logo" />
+          <a href="https://saividya.ac.in/" target="_blank" rel="noreferrer" aria-label="Sai Vidya Institute of Technology website">
+            <img src="/svit-logo.png" alt="SVIT logo" className="brand__svit-logo" />
+          </a>
           <div className="brand__line" aria-hidden="true" />
           <div className="brand__group">
             <ClubMark compact />
@@ -255,7 +251,7 @@ function App() {
           </div>
         </a>
         <nav className={`main-nav ${menuOpen ? 'main-nav--open' : ''}`}>
-          {['home', 'benefits', 'team', 'events', 'membership'].map((item) => (
+          {['home', 'benefits', 'team', 'events', 'membership', 'contact'].map((item) => (
             <a key={item} className={activeSection === item ? 'is-active' : ''} href={`#${item}`} onClick={closeMenu}>{item === 'team' ? 'Core Committee' : item === 'membership' ? 'Membership' : item[0].toUpperCase() + item.slice(1)}</a>
           ))}
           <a className="mobile-join" href={linkedinUrl} target="_blank" rel="noreferrer">Join the club <ExternalLink size={14} /></a>
@@ -268,7 +264,7 @@ function App() {
         <section id="home" className="hero section-pad">
           <div className="hero__content">
             <div className="eyebrow"><span className="eyebrow-dot" /> DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING</div>
-            <h1>Open source.<br /><em>Open minds.</em></h1>
+            <h1>An Initiative for<br /><em><span className="hero__nowrap">Democratizing Tech</span>, <span className="hero__accent-dark">Empowering Innovation</span></em></h1>
             <p className="hero__lead">A student-led technical initiative for people who believe the best technology is built together.</p>
             <p className="hero__sub"><span style={{ color: '#ffffff', fontWeight: 700 }}>Vision:</span> Empower students to learn, share, and build with open-source values.<br /><span style={{ color: '#ffffff', fontWeight: 700 }}>Mission:</span> Create a collaborative community that turns curiosity into practical innovation.</p>
             <div className="hero__actions"><a className="button button--primary" href="https://fossunited.org/" target="_blank" rel="noreferrer">EXPLORE FOSS UNITED EVENTS <ArrowUpRight size={17} /></a><a className="text-link" href={linkedinUrl} target="_blank" rel="noreferrer">Follow updates <Linkedin size={16} /></a></div>
@@ -296,7 +292,7 @@ function App() {
         </section>
 
         <section id="membership" className="membership section-pad section-rule">
-          <div className="section-heading"><div><span className="section-kicker">05 / MEMBERSHIP</span><h2>Get your<br /><em>badge.</em></h2></div><p>Enter your name and generate a personalised FOSS Club SVIT membership badge you can download and share.</p></div>
+          <div className="section-heading"><div><span className="section-kicker">05 / MEMBERSHIP</span><h2>Get your<br /><em>MEMBERSHIP Badge</em>.</h2></div><p>Enter your name and generate a personalised FOSS Club SVIT membership badge you can download and share.</p></div>
           <div className="membership__content">
             <div className="membership__panel">
               <label htmlFor="member-name" className="membership__label">Student name</label>
@@ -313,6 +309,14 @@ function App() {
           </div>
         </section>
 
+        <section id="contact" className="contact section-pad section-rule">
+          <div className="section-heading">
+            <div><span className="section-kicker">06 / CONTACT</span><h2>Let’s build<br /><em>together.</em></h2></div>
+            <p>Have a question, idea, or collaboration in mind? Reach out to the FOSS Club SVIT team.</p>
+          </div>
+          <a className="contact__email" href="mailto:foss.svit@gmail.com">foss.svit@gmail.com <ArrowUpRight size={17} /></a>
+        </section>
+
         <section className="cta section-pad"><div className="cta__pattern"><Network size={190} /></div><div className="cta__inner"><span className="section-kicker">READY WHEN YOU ARE</span><h2>Leave the code<br /><em>better than you found it.</em></h2><p>FOSS Club SVIT is your place to start.</p><a className="button button--primary" href={linkedinUrl} target="_blank" rel="noreferrer">Join the community <ArrowUpRight size={17} /></a></div></section>
       </main>
 
@@ -325,21 +329,14 @@ function App() {
         </div>
       )}
 
-      <footer className="footer"><div className="footer__top">      <a href="#home" className="brand"><ClubMark compact />      <span><strong>FOSS CLUB</strong><small>SAI VIDYA INSTITUTE OF TECHNOLOGY</small></span></a><p>Free & Open Source Software Club<br />Sai Vidya Institute of Technology</p><div className="footer__social"><a href={linkedinUrl} target="_blank" rel="noreferrer" aria-label="LinkedIn"><Linkedin size={18} /></a></div></div><div className="accreditation"><Check size={15} /> SAI VIDYA INSTITUTE OF TECHNOLOGY · Accredited by NBA, New Delhi (CSE, ECE, ISE) · NAAC — “A” Grade</div><div className="footer__bottom"><span>© 2026 FOSS CLUB SVIT</span><span>Designed for the open web <span className="footer-dot">●</span></span></div></footer>    </div>  );}
+      <footer className="footer"><div className="footer__top">      <a href="#home" className="brand"><ClubMark compact />      <span><strong>FOSS CLUB</strong><small>SAI VIDYA INSTITUTE OF TECHNOLOGY</small></span></a><p>Free & Open Source Software Club<br />Sai Vidya Institute of Technology</p><div className="footer__social"><a href={linkedinUrl} target="_blank" rel="noreferrer" aria-label="LinkedIn"><Linkedin size={18} /></a></div></div><div className="accreditation"><Check size={15} /> SAI VIDYA INSTITUTE OF TECHNOLOGY · Accredited by NBA, New Delhi (CSE, ECE, ISE) · NAAC — “A” Grade</div><div className="footer__bottom"><span>© 2026 FOSS CLUB SVIT</span><span>Designed for the open web <span className="footer-dot">●</span></span><span className="footer__developers">Developers: <a href="https://github.com/shreyas23dev" target="_blank" rel="noreferrer">Shreyas A</a> &amp; <a href="https://github.com/CodingLangur" target="_blank" rel="noreferrer">Trinath Bhattacharya</a></span></div></footer>    </div>  );}
 
 function MembershipBadge({ name }: { name: string }) {
   const displayName = (name || 'STUDENT NAME').trim() || 'STUDENT NAME';
-  const titleCaseName = displayName
-    .toLowerCase()
-    .split(/\s+/)
-    .filter(Boolean)
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-    .join(' ');
-
   return (
     <div className="membership__badge-wrap" aria-label={`FOSS Club SVIT membership badge for ${displayName}`}>
       <img src="/foss-badge-template.png" alt="FOSS Club SVIT membership badge" className="membership__badge-image" />
-      <div className="membership__badge-name">{titleCaseName || 'Student Name'}</div>
+      <div className="membership__badge-name">{displayName}</div>
     </div>
   );
 }
